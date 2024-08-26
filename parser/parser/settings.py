@@ -82,6 +82,12 @@ TEMPLATES = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'api.permissions.IsAuthenticated',
+    ]
+}
+
 WSGI_APPLICATION = 'parser.wsgi.application'
 ASGI_APPLICATION = "parser.asgi.application"
 
