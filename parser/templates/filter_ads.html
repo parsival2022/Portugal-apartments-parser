@@ -1,0 +1,96 @@
+{% extends 'ads_page.html' %}
+{% load static %}
+
+
+{% block title %}
+Ads page
+{% endblock %}
+
+{% block current_page %}
+{{ page }}
+{% endblock %}
+
+{% block content %}
+<div class="buttons-wrapper">
+    <h3 class="text-center">Select type of the apartment:</h3>
+<div class="button-container">
+    <button name="filter-btn" type="button" onclick="paginationCallback(1, 'T0')">T0 </button>
+    <button name="filter-btn" type="button" onclick="paginationCallback(1, 'T1')">T1 </button>
+    <button name="filter-btn" type="button" onclick="paginationCallback(1, 'T2')">T2 </button>
+    <button name="filter-btn" type="button" onclick="paginationCallback(1, 'T3')">T3 </button>
+    <button name="filter-btn" type="button" onclick="paginationCallback(1, 'T4')">T4 </button>
+</div>
+</div>
+<!-- <div id="ads-container"></div> -->
+{{block.super}}
+{% endblock %}
+
+{% block page_style %}
+{{block.super}}
+<style>
+#ads-container{
+    min-height: 60vh;
+}
+.text-center{
+        text-align: center;
+}
+.buttons-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.button-container {
+    display: flex; 
+    justify-content: center; 
+    margin-bottom: 20px; 
+}
+
+.button-container button {
+    padding: 10px 20px; 
+    margin: 0 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    background-color: #043623; 
+    cursor: pointer; 
+}
+
+.button-container button:hover {
+    background-color: #e0e0e0; 
+    color: #043623;
+    font-weight: bold;
+}
+</style>
+{% endblock %}
+
+{% block page_script %}
+{{ block.super }}
+<!-- <script>
+    const filterUrl = "http://127.0.0.1:8000/parser/" + basePage +"/" + extra + "/"
+    function filterAds(type, pagination) {
+        currentType = type
+        url = filterUrl + (pagination ? pagination : currentPagination) + "/"
+        fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ type: currentType })
+        })
+        .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                currentPagination = data.current_pagination
+                paginationLength = data.pagination_length
+                renderAds(data.ads)
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+            });
+        }
+    </script> -->
+
+{% endblock %}

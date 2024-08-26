@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Parser{% endblock %}</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="flex flex-column h-100">
+    <header class="bg-black">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-md px-5">
+          <h3 class="active current-page fs-2 col-2">
+            {% block current_page %} {% endblock %}
+          </h3>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-5">
+              <li class="nav-item ms-3">
+                <a
+                  class="nav-link text-warning text-opacity-75"
+                  href="{% url 'home_page' %}"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item ms-3">
+                <a
+                  class="nav-link text-warning text-opacity-75"
+                  href="{% url 'ads_page' extra_arg='cheapest' pagination=1 %}"
+                  >Cheapest ads</a
+                >
+              </li>
+              <li class="nav-item ms-3">
+                <a
+                  class="nav-link text-warning text-opacity-75"
+                  href="{% url 'filter_ads_page' %}"
+                  >Filter ads</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-md" style="min-height: 80vh">
+      <div id="root" class="row justify-content-center py-5">
+        {% block content %} {% endblock %}
+      </div>
+    </main>
+
+    <footer class="d-flex flex-wrap align-items-center py-3 my-4 bg-black">
+      <div class="container-md">
+        <p class="mb-0 text-light fs-4">
+          Created by Parsival&copy; All rights reserved
+        </p>
+      </div>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {% block page_script %} {% endblock %}
+  </body>
+  <style>
+    body {
+      font-family: "Lucida Sans", sans-serif, sans-serif;
+    }
+    .current-page {
+      color: #0feb63;
+    }
+    .page-title {
+      padding-left: 5%;
+    }
+    .ad-title {
+      color: #214623;
+    }
+    .ad-text {
+      color: #0e0c2e;
+      font-size: 18px;
+      transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .ad-url:hover {
+      color: #9c0a29;
+    }
+    .property-info {
+      padding: 2%;
+      margin: 2%;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #f1efef;
+    }
+    .property-info i {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    .property-info p {
+      font-size: 17px;
+    }
+    form {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    header {
+      position: sticky;
+      top: 1%;
+      font-size: 24px;
+      font-weight: bold;
+      z-index: 100;
+    }
+    .chart-container{
+      position: relative;
+      height: 380px;
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      margin: 3% 0;
+    }
+    .chart-buttons-container{
+      display: flex;
+      margin: 3% 0;
+      max-width: 70%;
+      justify-content: space-around;
+    }
+  </style>
+  {% block page_style %} {% endblock %}
+</html>

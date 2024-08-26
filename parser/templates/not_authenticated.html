@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+Authentication
+{% endblock %}
+
+{% block content %}
+<div class="col-12 col-md-4 mt-5 pt-5" >
+<h2 id="title">
+    <p class="text-danger-emphasis mb-4 text-center">You're not authenticated!</p>
+    <p class="text-info-emphasis text-center">Please insert secret key:</p>
+</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <input class="border border-danger-subtle rounded-pill shadow-lg" type="text" id="secret_key" name="secret_key" required><br>
+    <button class="btn btn-success fs-5 text-light mt-3" type="submit">Login</button>
+</form>
+</div>
+
+{% if wrong_key %}
+  <div class="modal fade" id="wrongKeyModal" tabindex="-1" aria-labelledby="wrongKeyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body text-center fs-1 fw-bold">
+          <h4>{{ wrong_key }}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}
+
+{% block page_script %}
+<script>
+const toggleModal = () => {
+    const modal = new bootstrap.Modal('#wrongKeyModal', {keyboard: false})
+    const input = document.getElementById('secret_key')
+    if(!modal) return
+    modal.show()
+    input.value = null
+}
+document.addEventListener('DOMContentLoaded', toggleModal, false)
+</script>
+{% endblock %}
