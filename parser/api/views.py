@@ -1,14 +1,13 @@
 import rest_framework.status as status
 from django.shortcuts import render
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .managers import StatisticManager as sm, AdsManager as am
-from .permissions import IsAuthenticated
 
 
 @api_view(['GET', 'POST'])
 def home_page(request):
-    return render(request, 'home.html')
+    return render(request, 'root.html')
 
 @api_view(['GET'])
 def get_quantity(request, days):
@@ -27,8 +26,6 @@ def ads_page(request, extra_arg:str, pagination:int):
         return am.get_templated_paginated_ads(request, extra_arg, pagination, template='ads_page.html')
     if request.method == 'POST':
         return am.get_ads_by_type(extra_arg, pagination)
-
-
 
 @api_view(['GET'])
 def filter_ads_page(request):

@@ -16,7 +16,7 @@
     <header class="bg-black">
       <nav class="navbar navbar-expand-lg">
         <div class="container-md px-5">
-          <h3 class="active current-page fs-2 col-2">
+          <h3 class="active current-page fs-2 col-2" id="current-page">
             {% block current_page %} {% endblock %}
           </h3>
 
@@ -34,26 +34,11 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-5">
-              <li class="nav-item ms-3">
-                <a
-                  class="nav-link text-warning text-opacity-75"
-                  href="{% url 'home_page' %}"
-                  >Home</a
-                >
+              <li class="nav-item ms-3 text-warning text-opacity-75 nav-link" role="button" onclick="renderHomePage()">
+                Home
               </li>
-              <li class="nav-item ms-3">
-                <a
-                  class="nav-link text-warning text-opacity-75"
-                  href="{% url 'ads_page' extra_arg='cheapest' pagination=1 %}"
-                  >Cheapest ads</a
-                >
-              </li>
-              <li class="nav-item ms-3">
-                <a
-                  class="nav-link text-warning text-opacity-75"
-                  href="{% url 'filter_ads_page' %}"
-                  >Filter ads</a
-                >
+              <li class="nav-item ms-3 nav-link text-warning text-opacity-75" role="button" onclick="renderFiltersPage()">
+                Filters
               </li>
             </ul>
           </div>
@@ -62,9 +47,7 @@
     </header>
 
     <main class="container-md" style="min-height: 80vh">
-      <div id="root" class="row justify-content-center py-5">
-        {% block content %} {% endblock %}
-      </div>
+      <div id="root" class="row justify-content-center py-5"></div>
     </main>
 
     <footer class="d-flex flex-wrap align-items-center py-3 my-4 bg-black">
@@ -74,12 +57,15 @@
         </p>
       </div>
     </footer>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/charts.js' %}"></script>
     {% block page_script %} {% endblock %}
   </body>
   <style>
@@ -155,6 +141,37 @@
       margin: 3% 0;
       max-width: 70%;
       justify-content: space-around;
+    }
+    #ads-container{
+      min-height: 60vh;
+    }
+    .text-center{
+      text-align: center;
+    }
+    .buttons-wrapper{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .button-container {
+      display: flex; 
+      justify-content: center; 
+      margin-bottom: 20px; 
+    }
+
+    .button-container button {
+      padding: 10px 20px; 
+      margin: 0 10px; 
+      border: 1px solid #ccc; 
+      border-radius: 5px; 
+      background-color: #043623; 
+      cursor: pointer; 
+    }
+
+    .button-container button:hover {
+      background-color: #e0e0e0; 
+      color: #043623;
+      font-weight: bold;
     }
   </style>
   {% block page_style %} {% endblock %}

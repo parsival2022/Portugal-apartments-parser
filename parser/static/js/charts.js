@@ -1,20 +1,6 @@
-const root = document.getElementById("root");
-const getQuantitiesUrl = "http://127.0.0.1:8000/parser/get_quantity/";
-const getPricesUrl = "http://127.0.0.1:8000/parser/get_prices/";
-const QUANTITY = "quantity";
-const PRICES = "prices";
-const PRICES_PER_SQM = "prices per sqm";
-
 
 Chart.defaults.backgroundColor = "#fff";
 Chart.defaults.borderColor = "#1b1d1f";
-
-function getSpinner() {
-  const spinner = `<div class="spinner-border text-dark mt-5" style="width: 5rem; height: 5rem;" role="status">
-                       <span class="visually-hidden">Loading...</span>
-                   </div>`;
-  return spinner;
-}
 
 function getDatasets(data, id){
     let datasets;
@@ -136,7 +122,7 @@ function renderContainerAndChart(data, id) {
   const buttonsContainer = createButtons();
   chartContainer.appendChild(chart);
   chartContainer.appendChild(buttonsContainer);
-  root.appendChild(chartContainer);
+  root.renderHtml(chartContainer);
 }
 
 async function reRenderChart(e) {

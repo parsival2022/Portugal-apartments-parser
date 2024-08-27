@@ -2,4 +2,5 @@
 .lvenv
 .vscode
 migrations
+staticfiles
 __pycache__
